@@ -17,12 +17,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.example.composepractice.practice.Alignments
-import com.example.composepractice.practice.Counter
-import com.example.composepractice.practice.Login
-import com.example.composepractice.practice.RowsAndColumns
+import com.example.composepractice.practice.*
 import com.example.composepractice.ui.theme.ComposePracticeTheme
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -31,21 +29,12 @@ import kotlinx.coroutines.launch
 private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
+    private lateinit var intFlow: Flow<Int>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        viewmodel
-        val intFlow = flow<Int> {
-            var i = 60
-            while (i >= 0) {
-                emit(i)
-                delay(1000)
-                i--
-            }
-        }
-
-
-//        activity
+        dataSetUp()
 
 
         setContent {
@@ -53,24 +42,19 @@ class MainActivity : ComponentActivity() {
 //            Alignments()
 //            Counter()
 //            Login()
+            Timer(intFlow)
 
-            var count by remember {
-                mutableStateOf(0)
+        }
+    }
+
+    private fun dataSetUp() {
+        intFlow = flow<Int> {
+            var i = 60
+            while (i >= 0) {
+                emit(i)
+                delay(1000)
+                i--
             }
-            LaunchedEffect(key1 = true) {
-                intFlow.collect {
-                    count = it
-                }
-            }
-
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-
-                Text(text = "$count")
-            }
-
         }
     }
 }
