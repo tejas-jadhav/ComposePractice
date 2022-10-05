@@ -1,5 +1,6 @@
-package com.example.composepractice
+package com.example.composepractice.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -16,9 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.composepractice.data.model.PracticeItem
 import com.example.composepractice.practice.*
+import com.example.composepractice.ui.components.MainScreen
 import com.example.composepractice.ui.theme.ComposePracticeTheme
+import com.example.composepractice.viewmodel.MyViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
@@ -29,33 +35,25 @@ import kotlinx.coroutines.launch
 private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
-    private lateinit var intFlow: Flow<Int>
 
+    private var _viewModel: MyViewModel? = null
+    private val viewModel: MyViewModel get() = _viewModel!!
+
+    private val handlePracticeItemClick: (PracticeItem) -> Unit = { practiceItem ->
+        val outputIntent = Intent(this, SecondActivity::class.java)
+        outputIntent.putExtra(SecondActivity.PRACTICE_ITEM, practiceItem.practice)
+        startActivity(outputIntent)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dataSetUp()
-
+        _viewModel = ViewModelProvider(this)[MyViewModel::class.java]
 
         setContent {
-//            RowsAndColumns()
-//            Alignments()
-//            Counter()
-//            Login()
-            Timer(intFlow)
-
+            MainScreen(viewModel, onPracticeItemClick = handlePracticeItemClick)
         }
     }
 
-    private fun dataSetUp() {
-        intFlow = flow<Int> {
-            var i = 60
-            while (i >= 0) {
-                emit(i)
-                delay(1000)
-                i--
-            }
-        }
-    }
+
 }
 
