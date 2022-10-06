@@ -16,7 +16,7 @@ fun Alignments() {
     Column() {
         Row(
             modifier = Modifier
-                .background(Color.Red)
+                .background(Color.DarkGray)
                 .padding(16.dp, 8.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -29,7 +29,7 @@ fun Alignments() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Green)
+                .background(Color.LightGray)
         ,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly

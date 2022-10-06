@@ -28,7 +28,7 @@ class PracticeRepository {
             PracticeItem(
                 "Login",
                 "Opening a new Activity and Passing Login data to it. " +
-                        "I've also added Circular Progress Indicator and validated form values.",
+                        "I've also added form validation. All the logic is present in the ViewModel",
                 Practice.Login_Impl,
                 4,
             ),
