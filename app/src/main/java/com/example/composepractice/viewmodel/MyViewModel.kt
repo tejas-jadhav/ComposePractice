@@ -55,7 +55,6 @@ class MyViewModel : ViewModel() {
     }
 
     private fun isLoginFormValid(): Boolean {
-
         val emailResult = LoginFormValidator.validateEmail(loginState.email)
         val passwordResult = LoginFormValidator.validatePassword(loginState.password)
 
@@ -76,5 +75,4 @@ class MyViewModel : ViewModel() {
 
         return !hasError
     }
-
 }

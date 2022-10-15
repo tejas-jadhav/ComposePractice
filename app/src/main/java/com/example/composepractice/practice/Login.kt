@@ -33,6 +33,9 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun Login(myViewModel: MyViewModel = viewModel()) {
     val userDetails = myViewModel.loginState
+    var loading by remember {
+        mutableStateOf(false)
+    }
 
     val context = LocalContext.current
 
@@ -40,10 +43,15 @@ fun Login(myViewModel: MyViewModel = viewModel()) {
         myViewModel.loginEvent.collect { loginResult ->
             when (loginResult) {
                 is Resource.Success -> {
+                    loading = false
                     Toast.makeText(context, "Login succeeded", Toast.LENGTH_SHORT).show()
                 }
-                is Resource.Error -> {}
-                is Resource.Loading -> {}
+                is Resource.Error -> {
+                    loading = false
+                }
+                is Resource.Loading -> {
+                    loading = true
+                }
             }
         }
     }
@@ -65,8 +73,8 @@ fun Login(myViewModel: MyViewModel = viewModel()) {
             hasError = userDetails.emailError != null,
             errorMessage = userDetails.emailError,
             onValueChange = {
-            myViewModel.onLoginFormEvent(LoginFormEvent.EmailChanged(it))
-        })
+                myViewModel.onLoginFormEvent(LoginFormEvent.EmailChanged(it))
+            })
         Spacer(modifier = Modifier.height(20.dp))
 
         PasswordTextField(
@@ -79,12 +87,14 @@ fun Login(myViewModel: MyViewModel = viewModel()) {
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        Button(onClick = {
+
+        SubmitButton(loading = loading, onClick = {
             myViewModel.onLoginFormEvent(LoginFormEvent.Submit)
-        }, modifier = Modifier.fillMaxWidth(0.8f)) {
+        }) {
             Text("Login")
         }
         Spacer(modifier = Modifier.height(20.dp))
+
 
         TextButton(onClick = {
             Toast.makeText(
@@ -94,6 +104,18 @@ fun Login(myViewModel: MyViewModel = viewModel()) {
             Text("Forgot password ?")
         }
 
+    }
+}
+
+@Composable
+fun SubmitButton(loading: Boolean = false, onClick: () -> Unit, content: @Composable () -> Unit) {
+    Button(onClick = onClick, modifier = Modifier.fillMaxWidth(0.8f), enabled = !loading) {
+        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            content()
+            if (loading) {
+                CircularProgressIndicator()
+            }
+        }
     }
 }
 
