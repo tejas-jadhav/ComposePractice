@@ -75,7 +75,8 @@ fun SearchBar(
                 singleLine = true,
                 maxLines = 1,
                 modifier = Modifier
-                    .fillMaxWidth(0.85f)
+                    .fillMaxWidth()
+                    .weight(1f)
                     .padding(top = 12.dp, bottom = 12.dp, start = 8.dp, end = 0.dp)
                     .onFocusChanged {
                         isFocused = it.isFocused

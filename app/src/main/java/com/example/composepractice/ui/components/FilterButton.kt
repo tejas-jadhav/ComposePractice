@@ -2,9 +2,7 @@ package com.example.composepractice.ui.components
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -26,6 +24,8 @@ fun FilterButton(modifier: Modifier = Modifier, showText: Boolean = true) {
 
     Box(modifier = modifier) {
         Button(
+            contentPadding = if (showText) ButtonDefaults.ContentPadding else PaddingValues(0.dp),
+            modifier = Modifier.defaultMinSize(36.dp),
             onClick = { /*TODO*/ },
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors(backgroundColor = ComposeGreen)

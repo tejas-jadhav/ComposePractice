@@ -1,10 +1,7 @@
 package com.example.composepractice.ui.components
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,13 +13,9 @@ fun ActionRow(
     onSearchBarValueChange: (String) -> Unit = {},
     onFilterButtonClick: () -> Unit = {}
 ) {
-    var searchBarWidthPercent by remember {
-        mutableStateOf(0.7f)
-    }
     var showFilterButtonText by remember {
         mutableStateOf(true)
     }
-    val searchBarWidth by animateFloatAsState(targetValue = searchBarWidthPercent)
 
     Row(
         modifier = modifier
@@ -32,12 +25,15 @@ fun ActionRow(
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         SearchBar(
-            modifier = Modifier.fillMaxWidth(searchBarWidth),
-            onFocusChanged = { focusState ->
-                searchBarWidthPercent = if (focusState.isFocused) 0.82f else 0.7f
-                showFilterButtonText = !focusState.isFocused
-            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            onFocusChanged = { showFilterButtonText = !it.isFocused },
             onValueChange = {})
+
+        Spacer(modifier = Modifier.width(if (showFilterButtonText) 6.dp else 2.dp))
+
         FilterButton(showText = showFilterButtonText)
+
     }
 }
