@@ -1,6 +1,5 @@
 package com.example.composepractice.ui.components
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -11,7 +10,7 @@ import androidx.compose.ui.unit.dp
 fun ActionRow(
     modifier: Modifier = Modifier,
     onSearchBarValueChange: (String) -> Unit = {},
-    onFilterButtonClick: () -> Unit = {}
+    onFilterButtonClick: (Boolean) -> Unit = {}
 ) {
     var showFilterButtonText by remember {
         mutableStateOf(true)
@@ -33,7 +32,11 @@ fun ActionRow(
 
         Spacer(modifier = Modifier.width(if (showFilterButtonText) 6.dp else 2.dp))
 
-        FilterButton(showText = showFilterButtonText)
+        FilterButton(
+            showText = showFilterButtonText,
+            onClick = {
+            onFilterButtonClick(showFilterButtonText)
+        })
 
     }
 }

@@ -13,26 +13,34 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composepractice.R
 import com.example.composepractice.ui.theme.ComposeBlue
 import com.example.composepractice.ui.theme.ComposeDarkBlue
 import com.example.composepractice.ui.theme.ComposeDarkestBlue
 import com.example.composepractice.ui.theme.ComposeGreen
+import com.example.composepractice.util.Constants
+import com.example.composepractice.viewmodel.MyViewModel
 
 @Composable
-fun FilterButton(modifier: Modifier = Modifier, showText: Boolean = true) {
+fun FilterButton(
+    modifier: Modifier = Modifier,
+    showText: Boolean = true,
+    onClick: () -> Unit = {},
+    myViewModel: MyViewModel = viewModel()
+) {
 
     Box(modifier = modifier) {
         Button(
             contentPadding = if (showText) ButtonDefaults.ContentPadding else PaddingValues(0.dp),
             modifier = Modifier.defaultMinSize(36.dp),
-            onClick = { /*TODO*/ },
+            onClick = onClick,
             shape = CircleShape,
             colors = ButtonDefaults.buttonColors(backgroundColor = ComposeGreen)
         ) {
             AnimatedVisibility(showText) {
                 Text(
-                    text = "Latest",
+                    text = if (myViewModel.sortType == Constants.ASCENDING) "Oldest" else "Latest",
                     letterSpacing = 0.sp,
                     color = ComposeDarkestBlue,
                     maxLines = 1

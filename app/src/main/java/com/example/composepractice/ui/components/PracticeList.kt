@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.composepractice.data.model.PracticeItem
+import com.example.composepractice.util.Constants
+import com.example.composepractice.viewmodel.MainActivityEvents
 import com.example.composepractice.viewmodel.MyViewModel
 
 
@@ -27,7 +29,6 @@ fun PracticeList(myViewModel: MyViewModel = viewModel(), onItemClick: (PracticeI
     val practiceExamples by remember {
         myViewModel.getPracticeExamples()
     }
-
     val offset = 2
 
 
@@ -38,7 +39,16 @@ fun PracticeList(myViewModel: MyViewModel = viewModel(), onItemClick: (PracticeI
                 return@items
             }
             if (it == 1) {
-                ActionRow(modifier = Modifier.padding(vertical = 20.dp))
+                ActionRow(
+                    modifier = Modifier.padding(vertical = 20.dp),
+                    onFilterButtonClick = { isExpanded ->
+                        if (isExpanded) {
+                            myViewModel.onFilterEvent(MainActivityEvents.FilterEvent.ExpandedClick())
+                        } else {
+                            myViewModel.onFilterEvent(MainActivityEvents.FilterEvent.CollapsedClick())
+                        }
+                    }
+                )
                 return@items
             }
             PracticeListItem(

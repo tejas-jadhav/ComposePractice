@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.composepractice.data.model.LoginFormState
 import com.example.composepractice.data.repository.PracticeRepository
+import com.example.composepractice.util.Constants
 import com.example.composepractice.util.Resource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
@@ -19,10 +20,38 @@ class MyViewModel : ViewModel() {
 
     private val repository = PracticeRepository()
     private var _practiceExamples = mutableStateOf(
-        repository.getPracticeExamples()
+        repository.getPracticeExamples().sortedByDescending { it.orderNumber }
     )
+    private var _sortType = Constants.DESCENDING
+    val sortType get() = _sortType
 
     fun getPracticeExamples() = _practiceExamples
+
+    private fun sortByLatest() {
+        _practiceExamples.value = _practiceExamples.value.sortedByDescending { it.orderNumber }
+        _sortType = Constants.DESCENDING
+    }
+    private fun sortByOldest() {
+        _practiceExamples.value = _practiceExamples.value.sortedBy { it.orderNumber }
+        _sortType = Constants.ASCENDING
+    }
+
+    fun onFilterEvent(event: MainActivityEvents.FilterEvent) {
+        when (event) {
+            is MainActivityEvents.FilterEvent.ExpandedClick -> {
+                when (_sortType) {
+                    Constants.ASCENDING -> sortByLatest()
+                    Constants.DESCENDING -> sortByOldest()
+                }
+            }
+            is MainActivityEvents.FilterEvent.CollapsedClick -> {
+
+            }
+        }
+    }
+
+
+
 
     // for login
     var loginState by mutableStateOf(LoginFormState())
