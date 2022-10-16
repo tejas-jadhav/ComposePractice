@@ -4,10 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import com.example.composepractice.data.model.PracticeItem
 import com.example.composepractice.practice.Login
 import com.example.composepractice.ui.components.MainScreen
+import com.example.composepractice.ui.components.SearchBar
+import com.example.composepractice.ui.theme.ComposeDarkestBlue
 import com.example.composepractice.viewmodel.MyViewModel
 
 private const val TAG = "MainActivity"
@@ -28,8 +33,7 @@ class MainActivity : ComponentActivity() {
         _viewModel = ViewModelProvider(this)[MyViewModel::class.java]
 
         setContent {
-            MainScreen(viewModel, onPracticeItemClick = handlePracticeItemClick)
-//            Login()
+                MainScreen(viewModel, onPracticeItemClick = handlePracticeItemClick)
         }
     }
 
