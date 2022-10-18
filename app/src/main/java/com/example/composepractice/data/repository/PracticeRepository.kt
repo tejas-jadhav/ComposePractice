@@ -32,7 +32,14 @@ class PracticeRepository {
                 Practice.LoginImpl,
                 4,
             ),
-
+            PracticeItem(
+                "Custom Progress Bar",
+                "Get acquainted with Compose 'Canvas' to draw custom pieces of UI. " +
+                        "Here, I've created an custom progress bar with some animations.",
+                Practice.CustomProgressBarImpl,
+                5,
             )
+
+        )
     }
 }

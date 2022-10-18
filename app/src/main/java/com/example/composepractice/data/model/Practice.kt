@@ -32,6 +32,13 @@ sealed class Practice: java.io.Serializable {
         }
     }
 
+    object CustomProgressBarImpl: Practice() {
+        @Composable
+        override fun Compose() {
+            CustomProgressBar()
+        }
+    }
+
 
     @Composable
     abstract fun Compose()
