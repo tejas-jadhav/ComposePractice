@@ -25,40 +25,36 @@ import com.example.composepractice.viewmodel.MyViewModel
 
 
 @Composable
-fun PracticeList(myViewModel: MyViewModel = viewModel(), onItemClick: (PracticeItem) -> Unit) {
-    val practiceExamples by remember {
-        myViewModel.getPracticeExamples()
-    }
-    val offset = 2
-
+fun PracticeList(practiceExamples: List<PracticeItem>, practiceListEvents: PracticeListEvents) {
 
     LazyColumn(modifier = Modifier.padding(top = 20.dp)) {
-        items(practiceExamples.size + offset) {
-            if (it == 0) {
+        items(practiceExamples.size + 2) { index ->
+            if (index == 0) {
                 Header()
                 return@items
             }
-            if (it == 1) {
+            if (index == 1) {
                 ActionRow(
                     modifier = Modifier.padding(vertical = 20.dp),
-                    onFilterButtonClick = { isExpanded ->
-                        if (isExpanded) {
-                            myViewModel.onFilterEvent(MainActivityEvents.FilterEvent.ExpandedClick())
-                        } else {
-                            myViewModel.onFilterEvent(MainActivityEvents.FilterEvent.CollapsedClick())
-                        }
-                    }
+                    onFilterButtonClick = { practiceListEvents.onFilterButtonClick(it) },
+                    onSearchBarValueChange = { practiceListEvents.onSearchBarValueChange(it) }
                 )
                 return@items
             }
             PracticeListItem(
-                practiceExamples[it - offset],
+                practiceExamples[index - 2],
                 onClick = {
-                    onItemClick(practiceExamples[it - offset])
+                    practiceListEvents.onPracticeItemClick(practiceExamples[index - 2])
                 }
             )
         }
     }
+}
+
+interface PracticeListEvents {
+    fun onFilterButtonClick(isExpanded: Boolean)
+    fun onPracticeItemClick(practiceItem: PracticeItem)
+    fun onSearchBarValueChange(text: String)
 }
 
 @Composable
