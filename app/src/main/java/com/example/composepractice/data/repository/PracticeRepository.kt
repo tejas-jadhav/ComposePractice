@@ -10,26 +10,26 @@ class PracticeRepository {
                 "Rows and Columns",
                 "Practicing the use of Rows and Columns. I've tried to create a " +
                         "complex layout by nesting Rows, Columns and Boxes.",
-                Practice.RowsAndColumns_Impl,
+                Practice.RowsAndColumnsImpl,
                 1,
             ),
             PracticeItem(
                 "Alignments",
                 "Aligning Items within Rows and Columns. I've also used a random color generator.",
-                Practice.Alignments_Impl,
+                Practice.AlignmentsImpl,
                 2,
             ),
             PracticeItem(
                 "Counter",
                 "Basic example of state. Increment, decrement and reset the counter",
-                Practice.Counter_Impl,
+                Practice.CounterImpl,
                 3,
             ),
             PracticeItem(
                 "Login",
                 "Using EditTexts to take input. I've also performed input validation." +
                         "Following best practices, all the logic is present in the ViewModel.",
-                Practice.Login_Impl,
+                Practice.LoginImpl,
                 4,
             ),
 

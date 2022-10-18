@@ -4,28 +4,28 @@ import androidx.compose.runtime.Composable
 import com.example.composepractice.practice.*
 
 sealed class Practice: java.io.Serializable {
-    object RowsAndColumns_Impl: Practice() {
+    object RowsAndColumnsImpl: Practice() {
         @Composable
         override fun Compose() {
             RowsAndColumns()
         }
     }
 
-    object Alignments_Impl: Practice() {
+    object AlignmentsImpl: Practice() {
         @Composable
         override fun Compose() {
             Alignments()
         }
     }
 
-    object Counter_Impl: Practice() {
+    object CounterImpl: Practice() {
         @Composable
         override fun Compose() {
             Counter()
         }
     }
 
-    object Login_Impl: Practice() {
+    object LoginImpl: Practice() {
         @Composable
         override fun Compose() {
             Login()
