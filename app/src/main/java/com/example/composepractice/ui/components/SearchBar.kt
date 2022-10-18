@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -71,7 +72,11 @@ fun SearchBar(
                     text = it
                     onValueChange(it)
                 },
-                textStyle = TextStyle(color = ComposeBlue, fontSize = 18.sp),
+                textStyle = TextStyle(
+                    color = ComposeBlue,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium
+                ),
                 singleLine = true,
                 maxLines = 1,
                 modifier = Modifier
@@ -96,7 +101,7 @@ fun SearchBar(
                     Icon(
                         imageVector = Icons.Default.Clear,
                         contentDescription = "Clear",
-                        tint = ComposeBlue
+                        tint = Color.White
                     )
                 }
             }
