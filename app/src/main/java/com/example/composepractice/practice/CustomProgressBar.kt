@@ -44,8 +44,10 @@ fun CustomProgressBar() {
             value = if (percent != 0) percent.toString() else "",
             textStyle = TextStyle(fontSize = 30.sp, textAlign = TextAlign.Center),
             onValueChange = {
-                percent = if (it.isNotBlank())
-                    it.toFloat().roundToInt() else 0
+                val input = if (it.isNotBlank()) {
+                    it.toFloat().roundToInt()
+                } else 0
+                percent = if (input > 100) 100 else input
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier
