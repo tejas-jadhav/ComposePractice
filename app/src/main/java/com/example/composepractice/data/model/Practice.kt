@@ -39,6 +39,12 @@ sealed class Practice: java.io.Serializable {
         }
     }
 
+    object MusicKnobImpl: Practice() {
+        @Composable
+        override fun Compose() {
+            MusicKnob()
+        }
+    }
 
     @Composable
     abstract fun Compose()

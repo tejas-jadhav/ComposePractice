@@ -38,6 +38,13 @@ class PracticeRepository {
                         "Here, I've created an custom progress bar with some animations.",
                 Practice.CustomProgressBarImpl,
                 5,
+            ),
+            PracticeItem(
+                "Music Knob",
+                "More of Canvas to create custom UI. The knob can be dragged and rotated, " +
+                        "and the music bar will be reflect the changes in volume.",
+                Practice.MusicKnobImpl,
+                6,
             )
 
         )
