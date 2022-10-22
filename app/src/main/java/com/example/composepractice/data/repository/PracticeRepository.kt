@@ -27,7 +27,7 @@ class PracticeRepository {
             ),
             PracticeItem(
                 "Login",
-                "Using EditTexts to take input. I've also performed input validation." +
+                "Using EditTexts to take input. I've also performed input validation. " +
                         "Following best practices, all the logic is present in the ViewModel.",
                 Practice.LoginImpl,
                 4,
@@ -45,6 +45,13 @@ class PracticeRepository {
                         "and the music bar will be reflect the changes in volume.",
                 Practice.MusicKnobImpl,
                 6,
+            ),
+            PracticeItem(
+                "Alignments 2",
+                "Aligning items in rows and columns on the basis of state." +
+                        "This state can modified at the runtime by the user.",
+                Practice.Alignments2Impl,
+                7
             )
 
         )

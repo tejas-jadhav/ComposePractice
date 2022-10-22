@@ -46,6 +46,13 @@ sealed class Practice: java.io.Serializable {
         }
     }
 
+    object Alignments2Impl: Practice() {
+        @Composable
+        override fun Compose() {
+            Alignments2()
+        }
+    }
+
     @Composable
     abstract fun Compose()
 }
