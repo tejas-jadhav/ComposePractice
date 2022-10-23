@@ -1,6 +1,5 @@
 package com.example.composepractice.data.model
 
-import android.graphics.Paint.Align
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.Alignment
 
@@ -36,11 +35,11 @@ data class AlignmentData(
         val TOP = AlignmentData("Top", 0)
         val BOTTOM = AlignmentData("Bottom", 1)
 
-        fun getAllAlignmentRow() = listOf(
+        fun getAllAlignmentColumn() = listOf(
             START, END, CENTER
         )
 
-        fun getAllAlignmentColumn() = listOf(
+        fun getAllAlignmentRow() = listOf(
             TOP, BOTTOM, CENTER
         )
         fun getEquivalentValue(alignmentData: AlignmentData) = when (alignmentData) {
