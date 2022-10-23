@@ -52,6 +52,14 @@ class PracticeRepository {
                         "This state can modified at the runtime by the user.",
                 Practice.Alignments2Impl,
                 7
+            ),
+            PracticeItem(
+                "Timer",
+                "A custom timer created using Canvas. " +
+                        "Understood the use of LaunchedEffect to create side-effects when a certain state changes."
+                ,
+                Practice.TimerImpl,
+                8
             )
 
         )

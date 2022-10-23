@@ -53,6 +53,13 @@ sealed class Practice: java.io.Serializable {
         }
     }
 
+    object TimerImpl: Practice() {
+        @Composable
+        override fun Compose() {
+            Timer()
+        }
+    }
+
     @Composable
     abstract fun Compose()
 }

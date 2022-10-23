@@ -42,11 +42,12 @@ class MainActivity : ComponentActivity(), PracticeListEvents {
     }
 
     override fun onFilterButtonClick(isExpanded: Boolean) {
-        if (isExpanded) {
-            viewModel.onFilterEvent(MainActivityEvents.FilterEvent.ExpandedClick())
-        } else {
-            viewModel.onFilterEvent(MainActivityEvents.FilterEvent.CollapsedClick())
-        }
+//        if (isExpanded) {
+//            viewModel.onFilterEvent(MainActivityEvents.FilterEvent.ExpandedClick())
+//        } else {
+//            viewModel.onFilterEvent(MainActivityEvents.FilterEvent.CollapsedClick())
+//        }
+        viewModel.onFilterEvent(MainActivityEvents.FilterEvent.ExpandedClick())
     }
 
     override fun onPracticeItemClick(practiceItem: PracticeItem) {
