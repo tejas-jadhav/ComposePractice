@@ -10,7 +10,8 @@ import androidx.compose.ui.unit.dp
 fun ActionRow(
     modifier: Modifier = Modifier,
     onSearchBarValueChange: (String) -> Unit = {},
-    onFilterButtonClick: (Boolean) -> Unit = {}
+    onFilterButtonClick: (Boolean) -> Unit = {},
+    onSearchBarClear: () -> Unit = {}
 ) {
     var showFilterButtonText by remember {
         mutableStateOf(true)
@@ -28,15 +29,17 @@ fun ActionRow(
                 .fillMaxWidth()
                 .weight(1f),
             onFocusChanged = { showFilterButtonText = !it.isFocused },
-            onValueChange = {})
+            onValueChange = onSearchBarValueChange,
+            onSearchBarClear = onSearchBarClear
+        )
 
         Spacer(modifier = Modifier.width(if (showFilterButtonText) 6.dp else 2.dp))
 
         FilterButton(
             showText = showFilterButtonText,
             onClick = {
-            onFilterButtonClick(showFilterButtonText)
-        })
+                onFilterButtonClick(showFilterButtonText)
+            })
 
     }
 }

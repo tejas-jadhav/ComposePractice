@@ -36,7 +36,8 @@ fun SearchBar(
     modifier: Modifier = Modifier,
     hint: String = "Search...",
     onFocusChanged: (FocusState) -> Unit = {},
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    onSearchBarClear: () -> Unit
 ) {
     var text by remember {
         mutableStateOf("")
@@ -73,7 +74,7 @@ fun SearchBar(
                     onValueChange(it)
                 },
                 textStyle = TextStyle(
-                    color = ComposeBlue,
+                    color = Color.White,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Medium
                 ),
@@ -87,7 +88,7 @@ fun SearchBar(
                         isFocused = it.isFocused
                         onFocusChanged(it)
                     },
-                cursorBrush = SolidColor(ComposeGreen)
+                cursorBrush = SolidColor(ComposeBlue)
             )
             AnimatedVisibility(
                 isFocused,
@@ -96,12 +97,13 @@ fun SearchBar(
             ) {
                 IconButton(onClick = {
                     text = ""
+                    onSearchBarClear()
                     focusManager.clearFocus()
                 }) {
                     Icon(
                         imageVector = Icons.Default.Clear,
                         contentDescription = "Clear",
-                        tint = Color.White
+                        tint = ComposeBlue
                     )
                 }
             }
@@ -136,7 +138,7 @@ private fun TextHint(hint: String) {
 )
 @Composable
 fun Preview() {
-    SearchBar() {
+    SearchBar(onValueChange = {}) {
 
     }
 }

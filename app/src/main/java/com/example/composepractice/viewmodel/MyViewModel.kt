@@ -22,6 +22,7 @@ class MyViewModel : ViewModel() {
     private var _practiceExamples = mutableStateOf(
         repository.getPracticeExamples().sortedByDescending { it.orderNumber }
     )
+
     private var _sortType = Constants.DESCENDING
     val sortType get() = _sortType
 
@@ -31,9 +32,27 @@ class MyViewModel : ViewModel() {
         _practiceExamples.value = _practiceExamples.value.sortedByDescending { it.orderNumber }
         _sortType = Constants.DESCENDING
     }
+
     private fun sortByOldest() {
         _practiceExamples.value = _practiceExamples.value.sortedBy { it.orderNumber }
         _sortType = Constants.ASCENDING
+    }
+
+    fun filterByQuery(text: String) {
+        if (text.isBlank()) {
+            _practiceExamples.value = repository.getPracticeExamples()
+            if (sortType == Constants.DESCENDING) {
+                sortByLatest()
+            }
+            return
+        }
+        _practiceExamples.value = repository.getPracticeExamples().filter {
+            Log.e(TAG, "filterByQuery: ${it.name} in viewmodel")
+            it.name.contains(
+                text,
+                ignoreCase = true
+            ) || it.description.contains(text, ignoreCase = true)
+        }
     }
 
     fun onFilterEvent(event: MainActivityEvents.FilterEvent) {
@@ -51,8 +70,6 @@ class MyViewModel : ViewModel() {
     }
 
 
-
-
     // for login
     var loginState by mutableStateOf(LoginFormState())
     private val loginAction = Channel<Resource<LoginFormState>>()
@@ -67,7 +84,7 @@ class MyViewModel : ViewModel() {
                 loginState = loginState.copy(password = event.password)
             }
             LoginFormEvent.Submit -> if (isLoginFormValid()) {
-                Log.e(TAG, "onLoginFormEvent: form is valid so submitting", )
+                Log.e(TAG, "onLoginFormEvent: form is valid so submitting")
                 loginFormSubmit()
             }
         }

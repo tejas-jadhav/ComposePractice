@@ -37,7 +37,8 @@ fun PracticeList(practiceExamples: List<PracticeItem>, practiceListEvents: Pract
                 ActionRow(
                     modifier = Modifier.padding(vertical = 20.dp),
                     onFilterButtonClick = { practiceListEvents.onFilterButtonClick(it) },
-                    onSearchBarValueChange = { practiceListEvents.onSearchBarValueChange(it) }
+                    onSearchBarValueChange = { practiceListEvents.onSearchBarValueChange(it) },
+                    onSearchBarClear = { practiceListEvents.onSearchBarClearText() }
                 )
                 return@items
             }
@@ -55,6 +56,7 @@ interface PracticeListEvents {
     fun onFilterButtonClick(isExpanded: Boolean)
     fun onPracticeItemClick(practiceItem: PracticeItem)
     fun onSearchBarValueChange(text: String)
+    fun onSearchBarClearText()
 }
 
 @Composable
