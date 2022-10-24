@@ -66,6 +66,12 @@ class PracticeRepository {
                         "Also a throwback to the first app I created.",
                 Practice.BirthdayGreetImpl,
                 9
+            ),
+            PracticeItem(
+                "Tab Layout Practice",
+                "Implementing the classic Tab Layout using Jetpack Compose.",
+                Practice.TabLayoutPracticeImpl,
+                10
             )
 
         )

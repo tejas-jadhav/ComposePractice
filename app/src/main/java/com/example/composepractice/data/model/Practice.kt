@@ -2,6 +2,7 @@ package com.example.composepractice.data.model
 
 import androidx.compose.runtime.Composable
 import com.example.composepractice.practice.*
+import com.google.accompanist.pager.ExperimentalPagerApi
 
 sealed class Practice: java.io.Serializable {
     object RowsAndColumnsImpl: Practice() {
@@ -64,6 +65,14 @@ sealed class Practice: java.io.Serializable {
         @Composable
         override fun Compose() {
             BirthdayGreet()
+        }
+    }
+
+    object TabLayoutPracticeImpl: Practice() {
+        @OptIn(ExperimentalPagerApi::class)
+        @Composable
+        override fun Compose() {
+            TabLayoutPractice()
         }
     }
 
