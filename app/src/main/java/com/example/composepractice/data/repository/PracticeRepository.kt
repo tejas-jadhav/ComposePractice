@@ -56,10 +56,16 @@ class PracticeRepository {
             PracticeItem(
                 "Timer",
                 "A custom timer created using Canvas. " +
-                        "Understood the use of LaunchedEffect to create side-effects when a certain state changes."
-                ,
+                        "Understood the use of LaunchedEffect to create side-effects when a certain state changes.",
                 Practice.TimerImpl,
                 8
+            ),
+            PracticeItem(
+                "Birthday Greet",
+                "Learning navigation in compose. " +
+                        "Also a throwback to the first app I created.",
+                Practice.BirthdayGreetImpl,
+                9
             )
 
         )

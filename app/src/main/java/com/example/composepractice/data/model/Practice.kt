@@ -60,6 +60,13 @@ sealed class Practice: java.io.Serializable {
         }
     }
 
+    object BirthdayGreetImpl: Practice() {
+        @Composable
+        override fun Compose() {
+            BirthdayGreet()
+        }
+    }
+
     @Composable
     abstract fun Compose()
 }
